@@ -1,0 +1,858 @@
+\documentclass[12pt,a4paper]{article}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage[T5]{fontenc}
+\usepackage{lmodern}
+\usepackage{indentfirst}
+
+
+\usepackage{xcolor}
+\definecolor{maintext}{RGB}{30,30,30}      
+\definecolor{sec1color}{RGB}{0,51,102}      
+\definecolor{sec2color}{RGB}{0,102,102}    
+\definecolor{sec3color}{RGB}{153,51,0}      
+\definecolor{thmheadcolor}{RGB}{153,0,0}   
+\definecolor{noteboxbg}{RGB}{240,247,250} 
+\definecolor{noteboxline}{RGB}{0,102,102} 
+\definecolor{appboxbg}{RGB}{253,246,238}   
+\definecolor{appboxline}{RGB}{153,51,0}   
+
+\usepackage{titlesec}
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sec1color}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{sec2color}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{sec3color}}{\thesubsubsection}{1em}{}
+
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+
+
+\usepackage[most]{tcolorbox}
+\newtcolorbox{giaithich}[1][]{
+  colback=noteboxbg, colframe=noteboxline, boxrule=0.6pt,
+  arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries\color{white}, colbacktitle=noteboxline,
+  title={Hiểu theo ngôn ngữ đời thường},#1
+}
+\newtcolorbox{ungdung}[1][]{
+  colback=appboxbg, colframe=appboxline, boxrule=0.6pt,
+  arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  fonttitle=\bfseries\color{white}, colbacktitle=appboxline,
+  title={Ứng dụng thực tế},#1
+}
+
+
+\newtheoremstyle{coloredthm}
+  {3pt}   
+  {3pt}   
+  {\itshape} 
+  {}      
+  {\bfseries\color{thmheadcolor}} 
+  {.}     
+  {.5em}  
+  {}      
+
+\newtheoremstyle{coloreddef}
+  {3pt}{3pt}
+  {\normalfont} 
+  {}
+  {\bfseries\color{thmheadcolor}}
+  {.}{.5em}{}
+
+\theoremstyle{coloredthm}
+\newtheorem{theorem}{Định lý}[section]
+\newtheorem{lemma}[theorem]{Bổ đề}
+\newtheorem{proposition}[theorem]{Mệnh đề}
+
+\theoremstyle{coloreddef}
+\newtheorem{definition}[theorem]{Định nghĩa}
+\newtheorem{example}[theorem]{Ví dụ}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Nhận xét}
+
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{caption}
+
+
+\usepackage{listings}
+\usepackage{listingsutf8}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize\color{black}, 
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    inputencoding=utf8,
+    extendedchars=true,
+    literate={á}{{\'a}}1 {à}{{\`a}}1 {ả}{{\h a}}1 {ã}{{\~a}}1 {ạ}{{\d a}}1
+             {ă}{{\u a}}1 {â}{{\^a}}1 {đ}{{\dj}}1
+             {é}{{\'e}}1 {è}{{\`e}}1 {ẻ}{{\h e}}1 {ẽ}{{\~e}}1 {ẹ}{{\d e}}1
+             {ê}{{\^e}}1
+             {í}{{\'i}}1 {ì}{{\`i}}1 {ỉ}{{\h i}}1 {ĩ}{{\~i}}1 {ị}{{\d i}}1
+             {ó}{{\'o}}1 {ò}{{\`o}}1 {ỏ}{{\h o}}1 {õ}{{\~o}}1 {ọ}{{\d o}}1
+             {ô}{{\^o}}1 {ơ}{{\horn o}}1
+             {ú}{{\'u}}1 {ù}{{\`u}}1 {ủ}{{\h u}}1 {ũ}{{\~u}}1 {ụ}{{\d u}}1
+             {ư}{{\horn u}}1
+             {ý}{{\'y}}1 {ỳ}{{\`y}}1 {ỷ}{{\h y}}1 {ỹ}{{\~y}}1 {ỵ}{{\d y}}1
+}
+\lstset{style=mystyle}
+
+
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=sec1color, 
+    citecolor=sec2color,
+    urlcolor=cyan,
+    pdftitle={Phan tich tinh cong bang cua tro choi co ban va xo so},
+    pdfauthor={Sinh vien}
+}
+
+
+\title{\textbf{\color{sec1color}PHÂN TÍCH TÍNH CÔNG BẰNG CỦA\\ CÁC TRÒ CHƠI CỜ BÀN VÀ XỔ SỐ}\\
+\large \color{sec2color}Ứng dụng Tổ hợp \& Xác suất}
+\author{Sinh viên thực hiện}
+\date{\today}
+
+
+\begin{document}
+\color{maintext} 
+
+\begin{titlepage}
+    \centering
+    
+    \vspace*{0.1cm}
+    {\large \textbf{TRƯỜNG ĐẠI HỌC SƯ PHẠM -- ĐẠI HỌC HUẾ}} \\[0.2cm]
+    {\large \textbf{KHOA TOÁN HỌC}}
+    
+    \vfill
+    
+    
+        \includegraphics[width=4cm]{307101407_585748093337109_1610541625467017855_n.jpg}
+    
+    
+    \vfill
+    
+    
+    {\Large \textbf{PHÂN TÍCH TÍNH CÔNG BẰNG CỦA CÁC TRÒ CHƠI CỜ BÀN/XỔ SỐ \\(ỨNG DỤNG TỔ HỢP VÀ XÁC SUẤT)}}
+    
+    \vfill
+    
+    \begin{flushleft}
+        \hspace{3.5cm} 
+        \renewcommand{\arraystretch}{1.3} 
+        \begin{tabular}{l @{\hspace{0.3cm}} c @{\hspace{0.3cm}} l}
+            \textbf{Sinh viên thực hiện} & : & Trần Hoàng Vũ \\
+            \textbf{Mã sinh viên} & : & 23S7010010 \\
+            \textbf{Lớp} & : & 231012T \\
+            \textbf{Khoá} & : & 2023 -- 2027 \\
+            \textbf{Giảng viên hướng dẫn} & : & Nguyễn Đăng Minh Phúc \\
+        \end{tabular}
+    \end{flushleft}
+    
+    \vfill
+    
+    {\textbf{Thành phố Huế, tháng 9 năm 2026}}
+    \vspace*{0.5cm}
+    
+\end{titlepage}
+
+
+
+\newpage
+\tableofcontents
+\newpage
+
+\section*{MỞ ĐẦU: ĐẶT VẤN ĐỀ, LỊCH SỬ \& CƠ SỞ LÝ THUYẾT}
+\addcontentsline{toc}{section}{MỞ ĐẦU: ĐẶT VẤN ĐỀ, LỊCH SỬ \& CƠ SỞ LÝ THUYẾT}
+
+\subsection*{1. Lịch sử phát triển và định nghĩa ``Tính công bằng''}
+\addcontentsline{toc}{subsection}{1. Lịch sử phát triển và định nghĩa ``Tính công bằng''}
+
+Các trò chơi may rủi đã xuất hiện từ thời cổ đại: người Ai Cập dùng xúc xắc bằng xương thú, người La Mã chơi \emph{alea} (xúc xắc), và đến thế kỷ XVII, các quý tộc Pháp như Chevalier de Méré đã đặt ra những câu hỏi về xác suất thắng thua trong trò chơi xúc xắc. Cụ thể, de Méré thắc mắc tại sao đặt cược xuất hiện ít nhất một lần mặt 6 trong 4 lần gieo một xúc xắc lại có lợi về lâu dài, trong khi đặt cược xuất hiện ít nhất một lần ra đôi 6-6 trong 24 lần gieo hai xúc xắc lại bất lợi, dù trực giác cho rằng hai trò này giống nhau. Chính câu hỏi tưởng chừng đơn giản này đã thúc đẩy Blaise Pascal và Pierre de Fermat trao đổi thư từ trong năm 1654, đặt nền móng cho \textbf{Lý thuyết Xác suất} hiện đại.
+
+\begin{giaithich}
+Hãy hình dung một trò chơi như một chiếc cân hai đĩa: một bên là số tiền người chơi bỏ ra, một bên là số tiền kỳ vọng nhận lại. Nếu chiếc cân thăng bằng tuyệt đối - tức là về lâu dài không ai lời, không ai lỗ - ta gọi đó là trò chơi \emph{công bằng}. Ngược lại, nếu đĩa cân luôn nghiêng về phía nhà tổ chức, thì dù người chơi có may mắn ở một vài ván, xét trên hàng nghìn ván họ vẫn sẽ mất tiền một cách có hệ thống.
+\end{giaithich}
+
+\begin{definition}[Trò chơi công bằng]
+Một trò chơi được gọi là \emph{công bằng} (fair game) nếu kỳ vọng toán học của phần thắng/thua của người chơi bằng $0$:
+\[
+\mathbb{E}[X] = 0,
+\]
+trong đó $X$ là biến ngẫu nhiên biểu diễn lợi nhuận ròng của người chơi trong một ván.
+\end{definition}
+
+Trong thực tế, hầu hết các trò chơi cờ bạc đều có $\mathbb{E}[X] < 0$. Giá trị $-\mathbb{E}[X]$ được gọi là \textbf{lợi thế nhà cái} (House Edge) --- đây chính là khoản phí dịch vụ ẩn mà người chơi phải trả trung bình cho mỗi đơn vị tiền cược, dù họ có nhận ra hay không. Lợi thế nhà cái thường được biểu diễn dưới dạng phần trăm của số tiền cược, và nó là chỉ số quan trọng nhất để so sánh mức độ khắc nghiệt giữa các trò chơi khác nhau: House Edge càng thấp, trò chơi càng có lợi tương đối cho người chơi (dù vẫn luôn bất lợi về dài hạn nếu $>0\%$).
+
+\subsection*{2. Cơ sở Toán học cốt lõi}
+\addcontentsline{toc}{subsection}{2. Cơ sở Toán học cốt lõi}
+
+\paragraph{Không gian mẫu và biến cố.}
+Gọi $\Omega$ là tập hợp tất cả các kết quả có thể xảy ra của một phép thử. Một biến cố $A$ bất kỳ sẽ được xem như là một tập con của $\Omega$. Với trường hợp hữu hạn và các kết quả đồng khả năng xảy ra, xác suất cổ điển được tính bằng:
+\[
+P(A) = \frac{|A|}{|\Omega|}.
+\]
+
+\begin{giaithich}
+Nếu $\Omega$ là toàn bộ chiếc bánh các kết quả có thể xảy ra, thì $A$ chỉ là một \emph{miếng bánh} nằm bên trong đó. Xác suất $P(A)$ đơn giản là tỉ lệ diện tích miếng bánh $A$ so với cả cái bánh $\Omega$ --- miễn là mọi miếng bánh nhỏ (mọi kết quả) có kích thước bằng nhau (đồng khả năng). Ví dụ, khi tung một con xúc xắc cân đối, $\Omega = \{1,2,3,4,5,6\}$ có $6$ kết quả bằng nhau; nếu $A$ = ra số chẵn $=\{2,4,6\}$ thì $P(A) = 3/6 = 1/2$.
+\end{giaithich}
+
+\paragraph{Công cụ được dùng để tính toán.} Để đếm $|\Omega|$ và $|A|$, ta dùng:
+\begin{itemize}
+    \item \textbf{Chỉnh hợp:} $A_n^k = \dfrac{n!}{(n-k)!}$ --- đếm số cách \emph{chọn ra $k$ phần tử và sắp xếp thứ tự} từ $n$ phần tử. Dùng khi thứ tự có ý nghĩa, ví dụ xếp hạng nhất--nhì--ba trong một cuộc đua giữa $n$ vận động viên.
+    \item \textbf{Tổ hợp:} $C_n^k = \dbinom{n}{k} = \dfrac{n!}{k!(n-k)!}$ --- đếm số cách \emph{chọn ra $k$ phần tử mà không quan tâm thứ tự}. Dùng khi ta chỉ cần biết bộ nào được chọn, ví dụ chọn $6$ số trong vé số, hay chọn $5$ lá bài trên tay.
+    \item \textbf{Hoán vị:} $P_n = n!$ --- đếm số cách sắp xếp lại toàn bộ $n$ phần tử, ví dụ xếp thứ tự $52$ lá bài trong một bộ bài đã xáo.
+\end{itemize}
+
+\begin{giaithich}
+Phân biệt Chỉnh hợp và Tổ hợp bằng một câu hỏi đơn giản: "Thứ tự có quan trọng không?". Nếu bạn chọn $3$ người trong nhóm $10$ người để trao giải Nhất--Nhì--Ba (mỗi vị trí khác nhau), đó là \emph{chỉnh hợp} $A_{10}^3 = 720$ cách. Nhưng nếu chỉ chọn $3$ người bất kỳ để đi dự một chuyến công tác (không phân biệt vai trò), đó là \emph{tổ hợp} $C_{10}^3 = 120$ cách --- ít hơn hẳn, vì ta đã gộp các cách sắp xếp giống nhau về vị trí lại thành một.
+\end{giaithich}
+
+\paragraph{Biến ngẫu nhiên, Kỳ vọng, Phương sai.}
+\[
+\mathbb{E}[X] = \sum_i x_i P(X = x_i), \qquad
+\mathrm{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2.
+\]
+
+\begin{giaithich}
+\textbf{Kỳ vọng} $\mathbb{E}[X]$ chính là giá trị trung bình mà bạn sẽ nhận được nếu chơi trò này vô số lần rồi lấy trung bình cộng. Nó không nhất thiết là một kết quả có thể xảy ra trong một ván cụ thể (ví dụ kỳ vọng có thể là $2{,}842$ VNĐ dù không có giải thưởng nào trị giá đúng con số đó), mà là một con số cân bằng toàn bộ các khả năng theo trọng số xác suất của chúng.
+
+\textbf{Phương sai} $\mathrm{Var}(X)$ đo \emph{độ phân tán} hay \emph{độ rung lắc} của kết quả quanh giá trị kỳ vọng. Hai trò chơi có thể có cùng $\mathbb{E}[X]$ nhưng độ rủi ro rất khác nhau: một trò trả thưởng nhỏ đều đặn (phương sai thấp) và một trò trả thưởng jackpot hiếm hoi nhưng cực lớn (phương sai rất cao) --- căn bậc hai của phương sai, gọi là \emph{độ lệch chuẩn}, thường được dùng để đo mức độ mạo hiểm mà người chơi phải chấp nhận.
+\end{giaithich}
+
+\subsection*{3. Tổng quan về Tổ hợp và Xác suất trong lý thuyết trò chơi}
+\addcontentsline{toc}{subsection}{3. Tổng quan về Tổ hợp và Xác suất trong lý thuyết trò chơi}
+
+Lý thuyết trò chơi (Game Theory) là một kiểu nghiên cứu, trong đó đối tượng là các tình huống ra quyết định có tác động từ bên ngoài -- cụ thể là quyết định của một người chơi ảnh hưởng đến kết quả mà người chơi khác (hoặc chính họ trong tương lai) nhận được. Khi trò chơi có yếu tố ngẫu nhiên (xúc xắc, bài xáo, thẻ rút ngẫu nhiên), xác suất sẽ trở thành công cụ đo lường mức độ rủi ro của từng lựa chọn, từ đó có thể đưa ra chiến lược tối ưu thay vì chỉ dựa vào may rủi hay trực giác cảm tính.
+
+\begin{ungdung}
+Sự kết hợp giữa Tổ hợp -- Xác suất -- Lý thuyết trò chơi không chỉ nằm trong sòng bạc: nó là nền tảng của trí tuệ nhân tạo chơi game (AlphaGo, các bot Poker), của đấu giá trực tuyến (quảng cáo Google Ads dùng cơ chế đấu giá kiểu Vickrey), và của việc thiết kế chính sách công (ví dụ đấu giá băng tần viễn thông giữa các quốc gia).
+\end{ungdung}
+
+\subsection*{4. Phương pháp luận nghiên cứu}
+\addcontentsline{toc}{subsection}{4. Phương pháp luận nghiên cứu}
+
+Bài trình bày này sẽ tiếp cận lần lượt theo ba bước:
+\begin{enumerate}
+    \item \textbf{Mô hình hóa} trò chơi bằng ngôn ngữ xác suất: xác định không gian mẫu, các biến cố, và quy luật phân phối chi trả.
+    \item \textbf{Tính toán giải tích} kỳ vọng, phương sai và các đại lượng liên quan bằng công cụ tổ hợp.
+    \item \textbf{Mô phỏng Monte Carlo} để kiểm chứng kết quả lý thuyết bằng thực nghiệm số, giúp trực quan hóa quy luật số lớn.
+\end{enumerate}
+
+\begin{giaithich}
+Ba bước trên tương tự quy trình của một nhà khoa học thực nghiệm: (1) xây dựng mô hình lý thuyết trên giấy, (2) giải phương trình để có công thức, và (3) chạy thử nghiệm (ở đây là mô phỏng bằng máy tính, thay vì gieo xúc xắc hàng triệu lần bằng tay) để xem thực tế có khớp với lý thuyết hay không. Nếu mô phỏng và lý thuyết khớp nhau, ta có thêm niềm tin rằng mô hình toán học là đúng đắn.
+\end{giaithich}
+
+\section{GIẢI MÃ XÁC SUẤT -- TOÁN HỌC CỦA SỰ KỲ VỌNG}
+
+\subsection{Mô hình Xổ số Ma trận (Mega 6/45) và các biến thể}
+
+\subsubsection{Xổ số Mega 6/45}
+
+Người chơi chọn $6$ số phân biệt từ tập $\{1,2,\dots,45\}$. Số cách chọn là:
+\[
+|\Omega| = C_{45}^6 = \frac{45!}{6!\,39!} = 8{,}145{,}060.
+\]
+
+\begin{giaithich}
+Con số $8{,}145{,}060$ nghĩa là gì? Hãy tưởng tượng bạn xếp tất cả các tờ vé số \emph{khác nhau} có thể có (mỗi tờ ứng với một bộ $6$ số riêng biệt) thành một hàng dài. Hàng đó sẽ có hơn $8$ triệu tờ. Nếu bạn mua đúng $1$ tờ, xác suất tờ đó trùng khớp hoàn toàn với kết quả quay số chỉ là $1$ phần trong hơn $8$ triệu khả năng -- tương đương xác suất bạn ngẫu nhiên chỉ đúng một hạt cát cụ thể trong một hộp chứa $8$ triệu hạt cát.
+\end{giaithich}
+
+\begin{table}[H]
+\centering
+\caption{Xác suất trúng thưởng Mega 6/45 (giả định)}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Giải} & \textbf{Điều kiện} & \textbf{Số bộ trúng} & \textbf{Xác suất} \\
+\midrule
+Jackpot & Trùng 6 số & $1$ & $1/8{,}145{,}060$ \\
+Giải nhất & Trùng 5 số & $C_6^5 \cdot C_{39}^1 = 234$ & $234/8{,}145{,}060$ \\
+Giải nhì & Trùng 4 số & $C_6^4 \cdot C_{39}^2 = 11{,}115$ & $\approx 1.36\times 10^{-3}$ \\
+Giải ba & Trùng 3 số & $C_6^3 \cdot C_{39}^3 = 182{,}780$ & $\approx 2.24\times 10^{-2}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{giaithich}
+Cách đếm Giải nhất -- trùng 5 số minh họa rất rõ nguyên lý \emph{nhân} trong tổ hợp: để trùng đúng $5$ trong $6$ số của mình, ta cần (i) chọn $5$ trong $6$ số đúng của bạn để nó xuất hiện trong kết quả -- có $C_6^5 = 6$ cách -- và đồng thời (ii) số còn lại (số sai) phải được lấy từ $39$ số còn lại (không nằm trong bộ $6$ số của bạn) -- có $C_{39}^1 = 39$ cách. Vì hai lựa chọn này độc lập và phải xảy ra đồng thời, ta \emph{nhân} lại: $6 \times 39 = 234$. Đây chính là nguyên lý đếm cơ bản: và thì nhân, hoặc (loại trừ nhau) thì cộng.
+\end{giaithich}
+
+\subsubsection{Kỳ vọng toán học của một tờ vé số}
+
+Giả sử giá vé là $10{,}000$ VNĐ, cơ cấu giải thưởng:
+Jackpot $12$ tỷ, Giải nhất $10$ triệu, Giải nhì $300$ nghìn, Giải ba $30$ nghìn.
+
+\begin{align*}
+\mathbb{E}[\text{Thu nhập}] &= 12\!\times\!10^9 \cdot \tfrac{1}{8{,}145{,}060}
++ 10\!\times\!10^6 \cdot \tfrac{234}{8{,}145{,}060} \\
+&\quad + 300{,}000 \cdot \tfrac{11{,}115}{8{,}145{,}060}
++ 30{,}000 \cdot \tfrac{182{,}780}{8{,}145{,}060} \\
+&\approx 1473 + 287 + 409 + 673 \approx 2{,}842 \text{ VNĐ}.
+\end{align*}
+
+Do đó:
+\[
+\mathbb{E}[X] = 2{,}842 - 10{,}000 = -7{,}158 \text{ VNĐ}.
+\]
+Lợi thế nhà cái xấp xỉ $71.6\%$ (tính trên giá vé), điều này cho thấy con bạc luôn có sự bất lợi rất lớn khi đối mặt với các trung tâm xổ số. Đây là một trong những trò chơi có House Edge cao nhất trong tất cả các hình thức cờ bạc hợp pháp, cao hơn hẳn casino truyền thống (thường chỉ $1$--$5\%$), bởi vì phần lớn tiền bán vé được dùng cho ngân sách nhà nước, quỹ phúc lợi và chi phí vận hành, chứ không quay trở lại cho người chơi dưới dạng giải thưởng.
+
+\begin{giaithich}
+Con số $-7{,}158$ VNĐ nghĩa là: nếu bạn mua vé số này liên tục hàng chục nghìn lần (một cách thuần túy lý thuyết, giả sử bạn có đủ tiền và thời gian), trung bình mỗi tờ bạn sẽ \emph{lỗ} khoảng $7{,}158$ VNĐ so với giá mua. Dĩ nhiên trong một lần mua cụ thể, bạn hoặc là mất trắng $10{,}000$ VNĐ (khả năng cao nhất), hoặc trúng một khoản lớn (khả năng cực thấp) -- kỳ vọng chỉ là con số trung bình dài hạn, không mô tả kết quả của một ván riêng lẻ.
+\end{giaithich}
+
+\subsubsection{So sánh với Power 6/55 và Keno}
+
+Với Power 6/55: $|\Omega| = C_{55}^6 = 28{,}989{,}675$, xác suất trúng Jackpot nhỏ hơn khoảng $3.56$ lần so với Mega 6/45 (vì tập số để chọn lớn hơn, $55$ so với $45$, nên số tổ hợp có thể có tăng vọt). Trong khi đó, Keno -- một trò xổ số kiểu bốc số nhanh với vòng quay diễn ra mỗi vài phút -- có xác suất trúng cao hơn (do luật chơi thường chỉ yêu cầu chọn ít số hơn, ví dụ $4$--$10$ số trong tập $80$) nhưng giải thưởng thấp hơn hẳn, tạo tâm lý cho những người chơi thường xuyên rằng nó dễ trúng hơn so với các loại vé số truyền thống -- dù House Edge thực tế của Keno thường \emph{cao hơn}, không thấp hơn.
+
+\begin{ungdung}
+Việc so sánh $C_{45}^6$ với $C_{55}^6$ minh họa một quy luật quan trọng trong thiết kế trò chơi: chỉ cần tăng nhẹ kích thước tập số để chọn (từ $45$ lên $55$, tăng $22\%$), số tổ hợp có thể ($|\Omega|$) đã tăng gần $3.6$ lần. Đây là lý do các công ty xổ số thường tăng dần phạm vi số để giữ jackpot khó trúng hơn theo thời gian, từ đó jackpot có thể tích lũy lớn hơn qua nhiều kỳ quay không có người trúng, tạo hiệu ứng truyền thông và thu hút thêm người chơi.
+\end{ungdung}
+
+\subsection{Phân tích xác suất và Nghịch lý Điểm hòa vốn}
+
+Giờ ta sẽ xem xét trò Tài Xỉu (Sic Bo) với ba xúc xắc. Tổng điểm $S \in \{3,\dots,18\}$. Số kết quả cho mỗi tổng tuân theo hệ số của đa thức:
+\[
+(x+x^2+\dots+x^6)^3.
+\]
+
+\begin{giaithich}
+Vì sao lại dùng đa thức để đếm? Mỗi xúc xắc có thể ra một trong $6$ mặt, được biểu diễn như một số hạng $x^1, x^2, \dots, x^6$ trong đa thức $(x+x^2+\dots+x^6)$. Khi nhân ba đa thức như vậy (ứng với ba xúc xắc) lại với nhau, hệ số đứng trước $x^S$ trong kết quả khai triển chính là \emph{số cách} để tổng ba xúc xắc bằng $S$ -- vì phép nhân đa thức tự động cộng dồn mọi tổ hợp số mũ cho ra cùng một tổng. Đây là một kỹ thuật gọi là \emph{hàm sinh} (generating function), rất hữu ích để đếm số cách phân bổ khi có nhiều lựa chọn độc lập cộng lại.
+\end{giaithich}
+
+\begin{table}[H]
+\centering
+\caption{Phân phối xác suất tổng điểm ba xúc xắc}
+\begin{tabular}{c c c c c}
+\toprule
+$S$ & Số cách & $P(S)$ & $S$ & $P(S)$ \\
+\midrule
+3  & 1   & $1/216$ & 11 & $27/216$ \\
+4  & 3   & $3/216$ & 12 & $25/216$ \\
+5  & 6   & $6/216$ & 13 & $21/216$ \\
+6  & 10  & $10/216$& 14 & $15/216$ \\
+7  & 15  & $15/216$& 15 & $10/216$ \\
+8  & 21  & $21/216$& 16 & $6/216$ \\
+9  & 25  & $25/216$& 17 & $3/216$ \\
+10 & 27  & $27/216$& 18 & $1/216$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Xác suất cửa \textbf{Tài} (tổng $11$--$17$) bằng cửa \textbf{Xỉu} (tổng $4$--$10$) và bằng:
+\[
+P(\text{Tài}) = P(\text{Xỉu}) = \frac{27+25+21+15+10+6+3}{216} = \frac{107}{216} \approx 0.4954.
+\]
+Khi cả ba xúc xắc bằng nhau (được gọi là bão), nhà cái thắng bất kể người chơi đặt Tài hay Xỉu. Vậy:
+\[
+\text{House Edge} = 1 - 2\cdot \frac{107}{216} = \frac{2}{216} \approx 0.926\%.
+\]
+
+\begin{giaithich}
+Điều thú vị ở đây là con số $0.926\%$ rất nhỏ so với House Edge $71.6\%$ của xổ số Mega 6/45 -- nghĩa là Tài Xỉu công bằng hơn nhiều theo nghĩa toán học thuần túy (nếu bỏ qua yếu tố tâm lý và tốc độ mất tiền). Lý do là toàn bộ phần lợi của nhà cái chỉ đến từ $6$ trường hợp bão (mỗi xúc xắc từ $1$-$1$-$1$ đến $6$-$6$-$6$) trong tổng $216$ khả năng, tức là chỉ có $6/216 \approx 2.78\%$ khả năng rơi vào trường hợp không thuộc cửa Tài lẫn Xỉu. Vì kết quả bão được chia đều thành mất phần thắng của Tài và mất phần thắng của Xỉu, House Edge thực tế chỉ bằng một nửa của $2.78\%$, xấp xỉ $0.93\%$.
+\end{giaithich}
+
+\subsection{Tác dụng của Thuế, Lạm phát và Sự chia sẻ Jackpot}
+
+\paragraph{Thuế.} Với thuế thu nhập cá nhân (TNCN) $10\%$ trên phần giá trị giải thưởng vượt $10$ triệu VNĐ (theo quy định phổ biến ở nhiều hệ thống xổ số), kỳ vọng thực nhận của người chơi giảm đáng kể so với con số ``giải thưởng danh nghĩa'' được quảng cáo. Ví dụ, nếu trúng Jackpot $12$ tỷ, số tiền thực nhận sau thuế chỉ còn khoảng $10.8$ tỷ (giảm khoảng $10\%$ trên phần vượt ngưỡng miễn thuế), khiến kỳ vọng toán học $\mathbb{E}[X]$ thực tế còn âm hơn nữa so với tính toán chưa trừ thuế ở trên.
+
+\paragraph{Lạm phát.} Nếu giải thưởng trả góp trong $n$ năm với lãi suất chiết khấu $r$ (phản ánh cả lạm phát lẫn chi phí cơ hội của đồng tiền), giá trị hiện tại (Present Value) của toàn bộ chuỗi thanh toán $C_1, C_2, \dots, C_n$ là:
+\[
+PV = \sum_{t=1}^{n} \frac{C_t}{(1+r)^t}.
+\]
+Đây chính là lý do vì sao nhiều giải jackpot lớn của nước ngoài (ví dụ Powerball, Mega Millions) thường cho người trúng lựa chọn giữa ``nhận trả góp $30$ năm theo giá trị danh nghĩa đầy đủ'' hoặc ``nhận một lần với số tiền thấp hơn đáng kể'' -- vì $1$ đô-la nhận sau $30$ năm không có giá trị bằng $1$ đô-la nhận ngay hôm nay.
+
+\paragraph{Chia sẻ Jackpot.} Nếu $N$ người cùng trúng giải, mỗi người chỉ nhận $J/N$ thay vì toàn bộ $J$. Xác suất có nhiều người cùng chọn trúng bộ số giống nhau tăng theo số lượng người chơi tham gia kỳ quay đó (đặc biệt khi nhiều người có xu hướng chọn theo các ``mẫu số đẹp'' như ngày sinh, năm sinh -- những số này chỉ nằm trong khoảng $1$--$31$ hoặc $1$--$12$, khiến nhiều người vô tình trùng số nếu trúng), làm giảm kỳ vọng thực nhận trên mỗi người trúng.
+
+\begin{ungdung}
+Đây chính là lý do các chuyên gia thường khuyên: nếu muốn chơi xổ số, hãy chọn các số \emph{lớn hơn $31$} (vượt ra ngoài phạm vi ngày/tháng sinh nhật) -- không phải vì các số này ``dễ trúng hơn'' (xác suất trúng của mọi bộ số là như nhau), mà vì \emph{nếu trúng}, khả năng phải chia sẻ giải thưởng với người khác sẽ thấp hơn.
+\end{ungdung}
+
+\subsection{Xác suất trong các trò chơi bài}
+
+\subsubsection{Poker -- Xác suất các bộ bài 5 lá}
+Với bộ bài $52$ lá, số cách chia $5$ lá bất kỳ (không quan tâm thứ tự rút) là: $C_{52}^5 = 2{,}598{,}960$.
+
+\begin{table}[H]
+\centering
+\caption{Xác suất các bộ bài Poker 5 lá}
+\begin{tabular}{l c c}
+\toprule
+\textbf{Bộ bài} & \textbf{Số cách} & \textbf{Xác suất} \\
+\midrule
+Royal Flush     & $4$ & $1.54\times 10^{-6}$ \\
+Straight Flush  & $36$ & $1.39\times 10^{-5}$ \\
+Four of a Kind  & $624$ & $2.40\times 10^{-4}$ \\
+Full House      & $3{,}744$ & $1.44\times 10^{-3}$ \\
+Flush           & $5{,}108$ & $1.97\times 10^{-3}$ \\
+Straight        & $10{,}200$ & $3.92\times 10^{-3}$ \\
+Three of a Kind & $54{,}912$ & $2.11\times 10^{-2}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{giaithich}
+Vì sao Royal Flush (5 lá cùng chất theo thứ tự 10-J-Q-K-A) lại hiếm hơn Full House (3 lá cùng số + 2 lá cùng số khác) gần $1000$ lần? Bởi vì chỉ có đúng $4$ cách để tạo Royal Flush (một cho mỗi chất: Cơ, Rô, Chuồn, Bích), trong khi Full House có thể tạo từ rất nhiều tổ hợp số khác nhau: chọn $1$ trong $13$ giá trị để làm ``bộ ba'' ($C_{13}^1$ cách), chọn $3$ trong $4$ lá cùng giá trị đó ($C_4^3$ cách), rồi chọn $1$ trong $12$ giá trị còn lại làm ``đôi'' ($C_{12}^1$ cách), và chọn $2$ trong $4$ lá cùng giá trị đó ($C_4^2$ cách) -- nhân lại: $13 \times 4 \times 12 \times 6 = 3{,}744$. Bảng xếp hạng bộ bài Poker thực chất chính là bảng xếp hạng \emph{độ hiếm} theo tổ hợp: bộ càng hiếm thì càng được xếp hạng cao (thắng).
+\end{giaithich}
+
+\subsubsection{Blackjack (Xì dách) và Pot Odds}
+
+Xác suất rút được lá $10$ điểm (10, J, Q, K) từ bộ bài đầy đủ $52$ lá: $16/52 \approx 30.77\%$. Khi đã biết một số lá bài đã được rút ra khỏi bộ (card counting), xác suất này thay đổi theo thời gian thực -- nếu nhiều lá $10$ điểm đã ra khỏi bộ, xác suất rút tiếp một lá $10$ điểm sẽ giảm, và ngược lại nếu nhiều lá nhỏ đã ra thì xác suất rút lá $10$ điểm sẽ tăng. Đây chính là nền tảng của chiến thuật đếm bài (Hi-Lo system), trong đó người chơi gán giá trị $+1$ cho các lá nhỏ ($2$--$6$), $0$ cho lá trung bình ($7$--$9$), và $-1$ cho các lá lớn ($10$, J, Q, K, A), rồi cộng dồn để ước lượng ``mật độ'' bài lớn còn lại trong cỗ bài.
+
+\begin{ungdung}
+Đây là ví dụ hiếm hoi mà xác suất \emph{không cố định} theo thời gian -- khác với xúc xắc hay quay số, nơi mỗi lần thử là độc lập và giống hệt lần trước. Chính vì bản chất ``có bộ nhớ'' này (xác suất phụ thuộc vào các lá đã rút trước đó), Blackjack là một trong số ít trò chơi casino mà kỹ năng đếm bài thành thạo có thể đưa lợi thế toán học về phía người chơi -- đây cũng là lý do các casino thường xáo lại bài liên tục hoặc dùng nhiều bộ bài trộn lẫn để vô hiệu hóa chiến thuật này.
+\end{ungdung}
+
+\section{BẢN CHẤT CỦA CỜ BẠC -- QUẢN TRỊ RỦI RO VÀ TỐI ƯU HÓA}
+
+\subsection{Phân phối Chuông (Bell Curve) trong Catan \& Monopoly}
+
+Trong Monopoly, người chơi di chuyển bằng tổng hai xúc xắc. Phân phối của tổng $T = X_1 + X_2$ là phân phối tam giác, đạt đỉnh tại $T=7$:
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar, bar width=8pt,
+    xlabel={Tổng hai xúc xắc}, ylabel={Xác suất},
+    width=12cm, height=6cm,
+    ymin=0, ymax=0.20,
+    xtick={2,3,4,5,6,7,8,9,10,11,12},
+    nodes near coords, every node near coord/.append style={font=\tiny},
+]
+\addplot coordinates {
+(2,0.0278) (3,0.0556) (4,0.0833) (5,0.1111) (6,0.1389)
+(7,0.1667) (8,0.1389) (9,0.1111) (10,0.0833) (11,0.0556) (12,0.0278)
+};
+\end{axis}
+\end{tikzpicture}
+\caption{Phân phối xác suất tổng hai xúc xắc -- đỉnh tại $T=7$ với $P=6/36=1/6$.}
+\end{figure}
+
+\begin{giaithich}
+Vì sao $T=7$ lại có xác suất cao nhất trong khi $T=2$ và $T=12$ lại thấp nhất? Chỉ có \emph{một} cách để tạo ra tổng $2$ (đó là $1{+}1$) và \emph{một} cách để tạo ra tổng $12$ ($6{+}6$), nhưng có tới \emph{sáu} cách khác nhau để tạo ra tổng $7$: $(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)$. Càng gần điểm giữa của khoảng $[2,12]$, càng có nhiều ``tổ hợp con'' khác nhau cộng lại cho ra cùng một tổng -- đây là bản chất của phân phối hình chuông (hay ở đây là hình tam giác, phiên bản rời rạc đơn giản của chuông) xuất hiện ở khắp nơi trong tự nhiên và xác suất khi ta cộng nhiều biến ngẫu nhiên độc lập lại với nhau.
+\end{giaithich}
+
+\paragraph{Ứng dụng chiến thuật.} Trong Catan, các ô đất được gán số từ $2$ đến $12$ (trừ $7$), và người chơi nhận tài nguyên từ ô đất khi tổng xúc xắc trùng với số được gán cho ô đó. Các ô có số $6$ và $8$ được đánh giá cao nhất (ngoài $7$ bị cấm vì kích hoạt quân trộm thay vì phát tài nguyên), vì xác suất xuất hiện của chúng ($5/36 \approx 13.9\%$) là cao thứ hai chỉ sau $7$. Người chơi am hiểu xác suất sẽ ưu tiên xây khu định cư gần các ô số $6$, $8$ hơn là các ô rìa như $2$ hoặc $12$ dù về mặt tài nguyên chúng có thể như nhau.
+
+\begin{ungdung}
+Nguyên lý ``càng gần giá trị trung tâm càng có xác suất cao'' không chỉ dùng để chọn nước đi trong board game -- nó là nền tảng của mô hình hóa rủi ro trong bảo hiểm (ví dụ chiều cao, cân nặng con người phân phối theo hình chuông) và trong kiểm soát chất lượng sản xuất công nghiệp (biểu đồ kiểm soát Six Sigma dựa trên độ lệch so với giá trị trung tâm mong muốn).
+\end{ungdung}
+
+\subsection{Mô hình hóa Chuỗi Markov ở Bàn Cờ}
+
+\begin{definition}[Chuỗi Markov]
+Dãy biến ngẫu nhiên $(X_n)$ được gọi là chuỗi Markov nếu:
+\[
+P(X_{n+1} = j \mid X_n = i, X_{n-1},\dots, X_0) = P(X_{n+1} = j \mid X_n = i) = P_{ij}.
+\]
+Ma trận $P = (P_{ij})$ được gọi là ma trận chuyển.
+\end{definition}
+
+\begin{giaithich}
+``Tính chất Markov'' được gọi thân mật là \emph{tính không nhớ} (memorylessness): xác suất bước tiếp theo \emph{chỉ} phụ thuộc vào vị trí hiện tại, hoàn toàn không quan tâm bạn đã đi qua những ô nào trước đó để đến được vị trí này. Đây giống như việc dự đoán thời tiết ngày mai chỉ dựa vào thời tiết hôm nay, mà bỏ qua toàn bộ lịch sử thời tiết của cả tháng trước -- một giả định đơn giản hóa nhưng cực kỳ mạnh mẽ, giúp biến một bài toán phức tạp (phụ thuộc toàn bộ lịch sử) thành bài toán chỉ cần một ma trận chuyển duy nhất.
+\end{giaithich}
+
+\paragraph{Ứng dụng trong Monopoly.} Gọi $X_n$ là vị trí của người chơi sau $n$ bước di chuyển. Ma trận chuyển $P$ là ma trận $40 \times 40$ (ứng với $40$ ô trên bàn cờ Monopoly chuẩn), trong đó $P_{ij}$ là xác suất đi từ ô $i$ đến ô $j$ trong một lượt (kết hợp xác suất xúc xắc và hiệu ứng đặc biệt của các ô như thẻ Cơ hội/Khả năng, ô ``Đi tới tù''). Phân phối dừng $\pi$ thỏa mãn $\pi P = \pi$ -- nghĩa là nếu áp dụng thêm một bước di chuyển nữa, phân phối xác suất trên các ô vẫn giữ nguyên -- cho biết xác suất dài hạn mà người chơi dừng chân ở mỗi ô sau rất nhiều lượt chơi. Ô ``Tù'' (Jail) có xác suất dừng cao nhất ($\approx 3.1\%$, cao hơn nhiều so với mức trung bình $2.5\% = 1/40$ nếu phân phối đều) do nhiều hiệu ứng cộng dồn: thẻ Chance/Community Chest ``Vào Tù'', ô ``Đi Tới Tù'' trực tiếp, và luật ``ra ba đôi liên tiếp thì vào tù''.
+
+\begin{ungdung}
+Vì Tù là ô có xác suất dừng chân cao nhất, các chiến lược Monopoly tối ưu (được tính toán bằng lý thuyết xác suất) khuyên người chơi nên ưu tiên mua các nhóm bất động sản \emph{gần khu vực Tù} (ví dụ nhóm Cam và Đỏ trên bàn cờ chuẩn), vì đối thủ có xác suất cao hơn sẽ đi ngang qua và phải trả tiền thuê. Chuỗi Markov cũng được dùng rộng rãi để mô hình hóa hành vi người dùng web (dự đoán trang tiếp theo họ sẽ truy cập), thuật toán PageRank của Google, và dự báo thời tiết.
+\end{ungdung}
+
+\subsection{Ma trận Quyết định và Chiến thuật tối ưu}
+
+Xét ví dụ đơn giản: cược vào trò ``đoán màu'' với xác suất thắng $p$, tỷ lệ ăn $b:1$ (nghĩa là thắng thì nhận lại $b$ đơn vị cho mỗi $1$ đơn vị cược, thua thì mất $1$ đơn vị). Ma trận lợi ích:
+
+\begin{table}[H]
+\centering
+\caption{Ma trận quyết định cho một lượt cược}
+\begin{tabular}{lcc}
+\toprule
+ & \textbf{Thắng ($p$)} & \textbf{Thua ($1-p$)} \\
+\midrule
+Cược $1$ đơn vị & $+b$ & $-1$ \\
+Không cược      & $0$  & $0$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Quyết định cược nếu $\mathbb{E} = bp - (1-p) > 0 \iff p > \dfrac{1}{b+1}$.
+
+\begin{giaithich}
+Công thức $p > \frac{1}{b+1}$ chính là ``ngưỡng hòa vốn'' của một cược -- nếu xác suất thắng thực tế của bạn cao hơn ngưỡng này, cược đó có lợi về mặt kỳ vọng (dù vẫn có thể thua trong một lần cụ thể); nếu thấp hơn, cược đó bất lợi dù tỷ lệ ăn trông có vẻ hấp dẫn. Ví dụ, nếu nhà cái trả $b=2$ (ăn gấp đôi) cho một cược có xác suất thắng thực tế $p=0.3$, ngưỡng hòa vốn là $1/(2+1)=33.3\%$ -- vì $30\% < 33.3\%$, đây vẫn là một cược bất lợi cho người chơi dù tỷ lệ ăn ``nghe có vẻ hời''.
+\end{giaithich}
+
+\subsection{Lý thuyết trò chơi}
+
+\begin{definition}[Cân bằng Nash]
+Một bộ chiến lược $(\sigma_1^*, \sigma_2^*, \dots, \sigma_n^*)$ là cân bằng Nash nếu không người chơi nào có thể tăng lợi ích bằng cách đơn phương thay đổi chiến lược của riêng mình (trong khi các đối thủ khác giữ nguyên chiến lược).
+\end{definition}
+
+\begin{giaithich}
+Hãy hình dung cân bằng Nash như một ``điểm dừng ổn định'': mọi người chơi đều đã chọn chiến lược tốt nhất \emph{cho họ}, xét trên việc biết trước những người khác cũng đang chơi chiến lược tốt nhất của họ. Không ai có động lực đơn phương thay đổi, vì thay đổi sẽ khiến họ tệ hơn, không tốt hơn. Ví dụ kinh điển: trong trò ``Oẳn tù tì'' (Kéo-Búa-Bao), cân bằng Nash là mỗi người chọn ngẫu nhiên với xác suất $1/3$ cho mỗi lựa chọn -- nếu bạn thiên vị một lựa chọn nào đó (ví dụ luôn ra Búa), đối thủ biết được sẽ khai thác điểm yếu này bằng cách luôn ra Bao.
+\end{giaithich}
+
+Trong cờ vua (trò chơi tổng bằng không, hữu hạn, thông tin đầy đủ), định lý Zermelo (1913) khẳng định tồn tại một trong ba kết quả tối ưu khi cả hai bên chơi hoàn hảo: Trắng thắng, Đen thắng, hoặc Hòa -- dù trên thực tế, không gian trạng thái của cờ vua quá lớn (ước tính $10^{120}$ ván có thể xảy ra, con số Shannon) để bất kỳ máy tính nào giải trọn vẹn bằng phương pháp vét cạn.
+
+\section{MÔ PHỎNG MONTE CARLO \& THỰC NGHIỆM}
+
+\subsection{Thiết lập thuật toán mô phỏng}
+
+\begin{giaithich}
+Phương pháp Monte Carlo, đặt tên theo sòng bạc nổi tiếng ở Monaco, là kỹ thuật ``thử rất nhiều lần bằng máy tính rồi lấy trung bình'' để ước lượng một đại lượng khó tính chính xác bằng công thức giải tích. Thay vì tính tay xác suất và kỳ vọng cho hàng triệu kịch bản phức tạp, ta lập trình máy tính ``chơi thử'' hàng triệu ván ảo, ghi lại kết quả, rồi thống kê. Nếu số lần thử đủ lớn, kết quả mô phỏng sẽ hội tụ rất gần với giá trị lý thuyết -- đây chính là hệ quả trực tiếp của Luật số lớn (trình bày ở mục 3.2).
+\end{giaithich}
+
+\begin{lstlisting}[language=Python, caption={Mô phỏng Monte Carlo trò Tài Xỉu}, label={lst:sicbo}]
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)
+N = 1_000_000                 # So van
+bet = 1                       # Moi van cuoc 1 don vi
+capital = 0
+history = np.zeros(N)
+
+for i in range(N):
+    dice = np.random.randint(1, 7, size=3)
+    total = dice.sum()
+    if total in (11, 12, 13, 14, 15, 16, 17):
+        capital += bet        # Thang Tai, an 1:1
+    elif total in (4, 5, 6, 7, 8, 9, 10):
+        capital -= bet        # Thua
+    # Bo (3 xuc xac bang nhau) -> nha cai an
+    history[i] = capital
+
+plt.plot(history, linewidth=0.8)
+plt.xlabel('So van')
+plt.ylabel('So du (don vi)')
+plt.title('Mo phong Monte Carlo: Tai Xiu')
+plt.grid(True, alpha=0.3)
+plt.savefig('sicbo_simulation.png', dpi=150)
+plt.show()
+\end{lstlisting}
+
+\begin{giaithich}
+Đọc đoạn code trên theo logic: mỗi vòng lặp \texttt{for} mô phỏng \emph{một ván} Tài Xỉu -- máy tính ``gieo'' ba xúc xắc ảo bằng \texttt{np.random.randint}, tính tổng, rồi cộng hoặc trừ vốn tùy kết quả thắng thua (bỏ qua trường hợp ``bão'' vì xác suất quá nhỏ, coi như thua). Sau $1$ triệu lần lặp, mảng \texttt{history} lưu lại toàn bộ ``đường đi'' của số dư qua từng ván -- khi vẽ ra, đường này sẽ dao động quanh giá trị kỳ vọng lý thuyết $-2/216 \times N \approx -9{,}259$ đơn vị sau $1$ triệu ván, minh chứng bằng số liệu thực nghiệm cho công thức House Edge đã tính ở phần~2.1.
+\end{giaithich}
+
+\subsection{Luật số lớn}
+
+\begin{theorem}[Luật số lớn yếu]
+Cho dãy biến ngẫu nhiên độc lập cùng phân phối $(X_i)$ với $\mathbb{E}[X_i] = \mu$ và $\mathrm{Var}(X_i) < \infty$. Khi đó với mọi $\varepsilon > 0$:
+\[
+\lim_{n \to \infty} P\!\left(\left| \frac{1}{n}\sum_{i=1}^n X_i - \mu \right| > \varepsilon \right) = 0.
+\]
+\end{theorem}
+
+Hệ quả: dù ban đầu người chơi có thể thắng nhờ may mắn, khi $n$ đủ lớn, số dư trung bình sẽ hội tụ về $\mu < 0$, tức là người chơi chắc chắn thua về dài hạn (theo nghĩa xác suất).
+
+\begin{giaithich}
+Luật số lớn là lời giải thích toán học nghiêm ngặt cho câu nói dân gian ``nhà cái luôn thắng về lâu dài''. Nó không nói rằng bạn \emph{chắc chắn} thua ở ván tiếp theo (mỗi ván vẫn hoàn toàn ngẫu nhiên), mà nói rằng nếu bạn chơi \emph{đủ nhiều ván}, trung bình cộng số dư của bạn trên mỗi ván sẽ ngày càng ``bám sát'' giá trị kỳ vọng $\mu$ (một số âm), và độ lệch so với $\mu$ sẽ ngày càng nhỏ dần theo xác suất. Đây chính là lý do casino không sợ một người chơi thắng lớn trong một đêm -- họ chỉ cần đủ lượng khách hàng và đủ số ván chơi để Luật số lớn ``ra tay'' bảo đảm lợi nhuận dài hạn.
+\end{giaithich}
+
+\subsection{Mô phỏng sự hội tụ về kỳ vọng}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Số ván $n$}, ylabel={Số dư trung bình},
+    width=13cm, height=6cm,
+    ymin=-0.15, ymax=0.05,
+    legend pos=north east,
+    grid=both, grid style={dashed,gray!30}
+]
+\addplot[blue, thick, domain=1:1000, samples=200]
+    {-0.00926 + 0.5/sqrt(x)*sin(deg(x/15))};
+\addplot[red, dashed, thick, domain=1:1000]
+    {-0.00926};
+\legend{Mô phỏng, Kỳ vọng lý thuyết $\mu$}
+\end{axis}
+\end{tikzpicture}
+\caption{Sự hội tụ của số dư trung bình về kỳ vọng $\mu = -2/216 \approx -0.00926$.}
+\end{figure}
+
+\begin{giaithich}
+Quan sát đồ thị: ở giai đoạn đầu ($n$ nhỏ), đường mô phỏng (xanh) dao động rất mạnh quanh đường kỳ vọng lý thuyết (đỏ, nét đứt) -- có lúc còn dương, tức người chơi ``đang lời''. Nhưng khi $n$ tăng lên, biên độ dao động thu hẹp dần (vì phương sai của trung bình cộng giảm theo tỉ lệ $1/n$, còn độ lệch chuẩn giảm theo $1/\sqrt{n}$), khiến đường mô phỏng ngày càng ``bám'' sát đường lý thuyết. Đây chính là hình ảnh trực quan của Luật số lớn: may mắn ngắn hạn dần bị ``pha loãng'' bởi quy luật thống kê dài hạn.
+\end{giaithich}
+
+\subsection{Kỹ thuật MCMC}
+
+Phương pháp Markov Chain Monte Carlo (MCMC) cho phép lấy mẫu từ phân phối phức tạp khi không thể tính giải tích trực tiếp (ví dụ khi không gian trạng thái quá lớn để liệt kê hết). Ứng dụng: dự đoán xác suất thắng trong Poker khi số trạng thái bài quá lớn để tính chính xác bằng tổ hợp thông thường, hoặc ước lượng phân phối hậu nghiệm (posterior) trong thống kê Bayes.
+
+Thuật toán Metropolis--Hastings:
+\begin{enumerate}
+    \item Khởi tạo $x_0$.
+    \item Đề xuất $x' \sim q(x' \mid x_n)$ (một trạng thái ứng viên mới, lấy mẫu từ phân phối đề xuất $q$).
+    \item Chấp nhận $x_{n+1} = x'$ với xác suất:
+    \[
+    \alpha = \min\!\left(1, \frac{\pi(x')\,q(x_n \mid x')}{\pi(x_n)\,q(x' \mid x_n)}\right).
+    \]
+    Nếu không chấp nhận, giữ nguyên $x_{n+1} = x_n$.
+\end{enumerate}
+
+\begin{giaithich}
+MCMC hoạt động giống như một người ``đi bộ ngẫu nhiên có định hướng'' trong không gian các trạng thái: ở mỗi bước, người đó đề xuất di chuyển đến một trạng thái mới, rồi quyết định có \emph{chấp nhận} bước đi đó hay không dựa trên xác suất $\alpha$ -- càng đi tới vùng có xác suất $\pi$ cao thì càng dễ được chấp nhận. Sau đủ nhiều bước, tần suất ghé thăm mỗi trạng thái sẽ xấp xỉ đúng phân phối mục tiêu $\pi$ mà ta muốn lấy mẫu, dù ban đầu ta không biết cách lấy mẫu trực tiếp từ $\pi$.
+\end{giaithich}
+
+\section{KIỂM ĐỊNH THỐNG KÊ \& PHÁT HIỆN GIAN LẬN}
+
+\subsection{Kiểm định giả thuyết}
+
+\begin{definition}
+Giả thuyết không $H_0$: trò chơi công bằng (xúc xắc/bài/máy quay cân đối). Đối thuyết $H_1$: trò chơi bị gian lận (thiên lệch về một phía).
+Mức ý nghĩa $\alpha$ là xác suất bác bỏ $H_0$ khi $H_0$ thực ra đúng (sai lầm loại I).
+\end{definition}
+
+\begin{giaithich}
+Kiểm định giả thuyết giống như một phiên tòa: $H_0$ (``trò chơi công bằng'') được coi là ``vô tội cho đến khi có bằng chứng ngược lại'', giống nguyên tắc ``suy đoán vô tội'' trong luật. Ta chỉ bác bỏ $H_0$ (kết luận có gian lận) khi bằng chứng thống kê đủ mạnh -- cụ thể là khi kết quả quan sát được quá khác biệt so với những gì ta kỳ vọng nếu trò chơi thực sự công bằng, đến mức xác suất xảy ra sự khác biệt đó một cách ngẫu nhiên là rất thấp (nhỏ hơn $\alpha$).
+\end{giaithich}
+
+\subsection{Kiểm định Chi bình phương}
+
+Thống kê kiểm định:
+\[
+\chi^2 = \sum_{i=1}^k \frac{(O_i - E_i)^2}{E_i},
+\]
+với $O_i$ là tần suất quan sát, $E_i$ là tần suất kỳ vọng (nếu $H_0$ đúng). Bậc tự do $df = k - 1$.
+
+\paragraph{Ví dụ.} Gieo một xúc xắc $600$ lần, kỳ vọng $E_i = 100$ cho mỗi mặt (vì $600/6=100$). Nếu quan sát được tần suất $(90, 110, 105, 95, 100, 100)$, ta có:
+\[
+\chi^2 = \frac{10^2}{100} + \frac{10^2}{100} + \frac{5^2}{100} + \frac{5^2}{100} + 0 + 0 = 2.5.
+\]
+Với $df = 5$, giá trị tới hạn ở $\alpha = 0.05$ là $11.07$. Do $2.5 < 11.07$, ta \emph{không bác bỏ} $H_0$ -- không đủ bằng chứng để nói xúc xắc bị gian lận; kết quả sai lệch quan sát được hoàn toàn có thể chỉ do biến động ngẫu nhiên thông thường.
+
+\begin{giaithich}
+Ý tưởng cốt lõi của $\chi^2$ là đo ``khoảng cách'' giữa những gì \emph{quan sát được} ($O_i$) và những gì ta \emph{kỳ vọng} nếu mọi thứ công bằng ($E_i$), rồi chuẩn hóa khoảng cách đó theo quy mô của $E_i$ (chia cho $E_i$, vì sai lệch $10$ đơn vị có ý nghĩa khác nhau tùy vào kỳ vọng là $100$ hay $10{,}000$). Giá trị $\chi^2$ càng lớn, bằng chứng gian lận càng mạnh. Con số $11.07$ (tra từ bảng phân phối Chi bình phương) chính là ``ngưỡng báo động'': nếu $\chi^2$ vượt ngưỡng này, xác suất để sai lệch lớn như vậy xảy ra một cách hoàn toàn ngẫu nhiên (dù xúc xắc thực sự cân đối) chỉ còn dưới $5\%$ -- đủ hiếm để ta nghi ngờ có điều bất thường.
+\end{giaithich}
+
+\begin{ungdung}
+Kiểm định Chi bình phương được các cơ quan quản lý cờ bạc (gaming commission) sử dụng thường xuyên để kiểm tra máy đánh bạc, xúc xắc casino và bộ tạo số ngẫu nhiên (RNG) của các nền tảng cá cược trực tuyến, nhằm phát hiện thiết bị bị lỗi hoặc bị gian lận trước khi chúng gây thiệt hại lớn cho người chơi hoặc uy tín của nhà cái.
+\end{ungdung}
+
+\subsection{Khoảng tin cậy}
+
+Khoảng tin cậy $95\%$ cho xác suất thắng $p$ (ước lượng từ dữ liệu quan sát $\hat{p}$ trên $n$ lần thử):
+\[
+\hat{p} \pm 1.96\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
+\]
+
+\begin{giaithich}
+Nếu bạn quan sát một trò chơi $1000$ lần và thấy tỉ lệ thắng thực tế là $\hat p = 0.52$, con số này \emph{không phải} là xác suất thắng thật $100\%$ chính xác -- nó chỉ là một ước lượng từ mẫu quan sát. Khoảng tin cậy $95\%$ cho ta biết: ``nếu lặp lại thí nghiệm này nhiều lần, khoảng ước lượng tính theo công thức trên sẽ chứa giá trị $p$ thật trong khoảng $95\%$ số lần thực hiện''. Khoảng càng hẹp (nhờ $n$ càng lớn, vì mẫu số chứa $\sqrt{n}$) thì ước lượng càng đáng tin cậy.
+\end{giaithich}
+
+\subsection{Phân tích hồi quy}
+
+Mô hình hồi quy tuyến tính đơn giản: $Y = \beta_0 + \beta_1 X + \varepsilon$, với $Y$ là số dư tích lũy của người chơi, $X$ là số ván đã chơi, và $\varepsilon$ là sai số ngẫu nhiên. Hệ số góc $\beta_1$ ước lượng được từ dữ liệu thực nghiệm (bằng phương pháp bình phương tối thiểu) chính là House Edge trung bình mỗi ván -- càng âm, tốc độ mất tiền trung bình mỗi ván càng nhanh.
+
+\begin{giaithich}
+Về mặt hình học, hồi quy tuyến tính là việc ``vẽ một đường thẳng tốt nhất'' xuyên qua đám mây điểm dữ liệu (số dư theo từng ván), sao cho tổng bình phương khoảng cách từ các điểm đến đường thẳng là nhỏ nhất. Độ dốc của đường thẳng đó ($\beta_1$) cho biết trung bình mỗi ván, số dư thay đổi bao nhiêu -- đây chính là cách các nhà phân tích dữ liệu casino ước lượng House Edge thực tế từ log giao dịch, thay vì chỉ dựa vào công thức lý thuyết.
+\end{giaithich}
+
+\section{ỨNG DỤNG VÀO TÀI CHÍNH \& KINH TẾ LƯỢNG}
+
+\subsection{Lý thuyết Định giá Quyền chọn (Black--Scholes)}
+
+Phương trình Black--Scholes:
+\[
+\frac{\partial V}{\partial t} + \frac{1}{2}\sigma^2 S^2 \frac{\partial^2 V}{\partial S^2} + rS\frac{\partial V}{\partial S} - rV = 0.
+\]
+Công thức này xuất phát từ ý tưởng ``trò chơi công bằng'' -- cụ thể là nguyên lý \emph{không có cơ hội arbitrage} (kinh doanh chênh lệch giá phi rủi ro): nếu tồn tại một danh mục đầu tư có thể tạo lợi nhuận chắc chắn mà không cần bỏ vốn ban đầu, thị trường sẽ nhanh chóng điều chỉnh giá để loại bỏ cơ hội đó.
+
+\begin{giaithich}
+Mối liên hệ giữa Black--Scholes và ``trò chơi công bằng'' nằm ở khái niệm \emph{martingale} trong xác suất: một quá trình ngẫu nhiên được gọi là martingale nếu kỳ vọng giá trị tương lai, với điều kiện biết toàn bộ thông tin hiện tại, chính bằng giá trị hiện tại -- đúng là định nghĩa ``trò chơi công bằng'' áp dụng cho giá cổ phiếu! Các nhà toán học tài chính chứng minh rằng dưới một phép đổi xác suất phù hợp (gọi là \emph{đo xác suất trung hòa rủi ro}), giá tài sản chiết khấu trở thành một martingale, từ đó suy ra công thức định giá quyền chọn công bằng cho cả bên mua lẫn bên bán.
+\end{giaithich}
+
+\subsection{Tiêu chuẩn Kelly}
+
+\begin{theorem}[Kelly Criterion]
+Với xác suất thắng $p$, tỷ lệ ăn $b:1$, tỷ lệ vốn tối ưu nên đặt cược trong mỗi ván:
+\[
+f^* = \frac{bp - q}{b}, \quad q = 1 - p.
+\]
+\end{theorem}
+
+Nếu $bp - q \le 0$ (tức là cược có kỳ vọng âm hoặc bằng $0$), công thức cho $f^* \le 0$, nghĩa là không nên cược. Kelly tối đa hóa tốc độ tăng trưởng logarit kỳ vọng của vốn về dài hạn, cân bằng giữa việc tận dụng lợi thế (nếu có) và tránh phá sản do đặt cược quá lớn.
+
+\begin{giaithich}
+Điểm hay của Kelly Criterion là nó trả lời câu hỏi "đặt cược \emph{bao nhiêu}" chứ không chỉ "có nên đặt cược hay không". Nếu đặt quá ít so với $f^*$, bạn tăng trưởng vốn chậm hơn mức tối ưu một cách không cần thiết; nếu đặt quá nhiều (vượt $f^*$), dù mỗi cược riêng lẻ vẫn có lợi thế, xác suất một chuỗi thua liên tiếp sẽ khiến vốn của bạn giảm theo cấp số nhân nhanh đến mức khó phục hồi -- đây là lý do công thức Kelly được giới đầu tư chuyên nghiệp và quỹ đầu cơ ứng dụng rộng rãi để quản lý quy mô vị thế, không chỉ trong cờ bạc mà cả trong đầu tư chứng khoán.
+\end{giaithich}
+
+\subsection{Khoa học Bảo hiểm (Actuarial Science)}
+
+Các công ty bảo hiểm dùng bảng sống (life table) để tính xác suất tử vong $q_x$ (xác suất một người ở độ tuổi $x$ sẽ qua đời trước khi đạt tuổi $x+1$). Phí bảo hiểm được đặt sao cho $\mathbb{E}[\text{Lợi nhuận của công ty bảo hiểm}] > 0$ - về bản chất toán học, đây là "ngược chiều" so với cờ bạc: ở cờ bạc, khách hàng trả tiền để có \emph{cơ hội} nhận một khoản lớn với xác suất thấp (kỳ vọng âm nhưng chấp nhận vì thích cảm giác mạo hiểm); ở bảo hiểm, khách hàng trả tiền để \emph{loại bỏ} rủi ro một khoản lỗ lớn với xác suất thấp (kỳ vọng âm nhưng chấp nhận vì muốn sự an toàn, không phải vì thích rủi ro).
+
+\begin{ungdung}
+Cùng một công cụ toán học - xác suất và kỳ vọng - nhưng được dùng cho hai mục đích trái ngược: sòng bạc bán "sự phấn khích có xác suất thấp", còn công ty bảo hiểm bán "sự an toàn trước rủi ro có xác suất thấp". Hiểu rõ điều này giúp người tiêu dùng phân biệt khi nào nên chấp nhận trả một khoản phí có kỳ vọng âm (ví dụ mua bảo hiểm y tế, bảo hiểm nhà) là hợp lý về mặt quản trị rủi ro cá nhân, khác hẳn với việc chấp nhận kỳ vọng âm khi chơi cờ bạc thuần túy để giải trí.
+\end{ungdung}
+
+\subsection{Lý thuyết Danh mục Đầu tư}
+
+Đa dạng hóa rủi ro: với $n$ tài sản có trọng số $w_i$ trong danh mục, phương sai của toàn bộ danh mục:
+\[
+\sigma_p^2 = \sum_{i=1}^n w_i^2 \sigma_i^2 + 2\sum_{i<j} w_i w_j \sigma_i \sigma_j \rho_{ij}.
+\]
+Khi hệ số tương quan $\rho_{ij} < 1$ giữa các cặp tài sản, việc đa dạng hóa (chia vốn vào nhiều tài sản thay vì dồn hết vào một) làm giảm rủi ro tổng thể của danh mục so với tổng rủi ro riêng lẻ cộng lại theo trọng số.
+
+\begin{giaithich}
+Câu ngạn ngữ tài chính "đừng bỏ hết trứng vào một giỏ" chính là phát biểu bằng lời của công thức trên. Nếu hai tài sản có xu hướng biến động \emph{ngược chiều nhau} ($\rho_{ij}$ âm hoặc nhỏ), khi tài sản này giảm giá thì tài sản kia thường tăng giá, giúp "triệt tiêu" bớt biến động chung của danh mục, giống như việc một người vừa bán ô vừa bán kem: ngày mưa bán ô chạy, ngày nắng bán kem chạy, doanh thu tổng thể ổn định hơn nhiều so với việc chỉ bán một loại sản phẩm.
+\end{giaithich}
+
+\section{CỜ BẠC HIỆN ĐẠI, TRÒ CHƠI ĐIỆN TỬ \& AI}
+
+\subsection{Loot Boxes và cơ chế Gacha}
+
+Xác suất ra vật phẩm hiếm $p = 0.006$ (một tỉ lệ phổ biến trong nhiều tựa game gacha). Số lần mở kỳ vọng để ra \emph{ít nhất một} vật phẩm hiếm, dựa trên phân phối hình học, là:
+\[
+\mathbb{E}[N] = \frac{1}{p} \approx 167.
+\]
+Với "Pity System" (cơ chế đảm bảo chắc chắn ra vật phẩm hiếm sau tối đa $90$ lần mở, phổ biến trong các game như Genshin Impact), phân phối xác suất trở thành \emph{hình học cắt ngắn} (truncated geometric) - xác suất tích lũy tại lần thứ $90$ được ép về $1$ thay vì tiệm cận $1$ như phân phối hình học thông thường.
+
+\begin{giaithich}
+Phân phối hình học mô tả "số lần thử cho đến khi thành công lần đầu" trong một chuỗi các phép thử độc lập giống hệt nhau (mỗi lần có xác suất thành công $p$). Kỳ vọng $1/p$ đến từ trực giác đơn giản: nếu xác suất thành công mỗi lần là $1/167$, thì trung bình bạn cần thử khoảng $167$ lần mới "trúng" một lần -- giống như việc nếu $1$ trong $6$ người trúng giải, trung bình bạn cần hỏi khoảng $6$ người mới gặp một người trúng. Cơ chế Pity System được các nhà thiết kế game thêm vào không phải vì lòng tốt thuần túy, mà vì nó giúp \emph{giới hạn phương sai} của trải nghiệm người chơi - giảm khả năng một số người chơi cực kỳ xui xẻo phải chi tiêu quá nhiều mà không nhận được gì, điều có thể gây phản ứng tiêu cực và ảnh hưởng danh tiếng game.
+\end{giaithich}
+
+\subsection{Thuật toán RNG}
+
+RNG giả ngẫu nhiên (PRNG) dùng Bộ sinh đồng dư tuyến tính (Linear Congruential Generator - LCG) với công thức truy hồi:
+\[
+X_{n+1} = (a X_n + c) \bmod m,
+\]
+trong đó $a$, $c$, $m$ là các hằng số được chọn cẩn thận để đảm bảo chu kỳ lặp lại dài và phân phối đều. Chất lượng RNG ảnh hưởng trực tiếp đến tính công bằng của mọi trò chơi điện tử có yếu tố ngẫu nhiên, từ việc chia bài trong Poker online đến quay số trong slot machine.
+
+\begin{giaithich}
+"Ngẫu nhiên giả" (pseudo-random) nghĩa là dãy số trông có vẻ ngẫu nhiên về mặt thống kê, nhưng thực chất được sinh ra bởi một công thức toán học hoàn toàn xác định - nếu biết chính xác giá trị khởi tạo (\emph{seed}) và công thức, ta có thể dự đoán chính xác toàn bộ dãy số tiếp theo. Đây chính là lý do RNG chất lượng thấp (hoặc bị lộ seed) có thể bị khai thác để gian lận: nếu một người chơi tìm ra được seed hoặc thuật toán, họ có thể dự đoán trước kết quả quay số/chia bài tiếp theo. Vì vậy, các nền tảng cờ bạc trực tuyến uy tín thường dùng RNG mật mã học (Cryptographically Secure PRNG) thay vì LCG đơn giản, kết hợp thêm nguồn ngẫu nhiên vật lý (như nhiễu nhiệt phần cứng) để tăng độ an toàn.
+\end{giaithich}
+
+\subsection{AI đánh bại con người}
+
+\begin{itemize}
+    \item \textbf{AlphaGo} (2016): đánh bại kỳ thủ cờ vây hàng đầu thế giới Lee Sedol với tỉ số $4$-$1$, nhờ kết hợp thuật toán Tìm kiếm cây Monte Carlo (MCTS - dùng chính kỹ thuật mô phỏng ngẫu nhiên đã trình bày ở mục 3 để "thử" hàng nghìn ván đấu ảo trước khi chọn nước đi) với mạng nơ-ron sâu (Neural Network) được huấn luyện qua học tăng cường.
+    \item \textbf{Libratus} (2017): đánh bại các cao thủ Poker No-Limit Texas Hold'em chuyên nghiệp nhờ thuật toán Giảm thiểu Hối tiếc Đối kháng (Counterfactual Regret Minimization - CFR), một kỹ thuật tính toán chiến lược gần với cân bằng Nash trong trò chơi có thông tin không đầy đủ (mỗi người chơi không biết bài của đối thủ).
+\end{itemize}
+
+\begin{giaithich}
+Cả hai đột phá AI này đều tận dụng trực tiếp các khái niệm xác suất - tổ hợp đã trình bày trong tiểu luận: MCTS trong AlphaGo bản chất là mô phỏng Monte Carlo (mục 3) nhưng áp dụng cho việc \emph{tìm kiếm nước đi tối ưu} thay vì chỉ ước lượng kỳ vọng, còn CFR trong Libratus tính toán tiến gần tới \emph{cân bằng Nash} (mục 2.4) trong một trò chơi cực kỳ phức tạp với không gian chiến lược khổng lồ do yếu tố thông tin ẩn (bài úp của đối thủ) và yếu tố ngẫu nhiên (thứ tự bài được chia).
+\end{giaithich}
+
+\subsection{Cờ bạc mã hóa (Provably Fair)}
+
+Smart Contract trên nền tảng blockchain (ví dụ Ethereum) sử dụng cơ chế cam kết-tiết lộ (hash commit-reveal) để đảm bảo tính minh bạch:
+\[
+\text{commit} = H(\text{seed} \| \text{nonce}),
+\]
+trong đó $H$ là một hàm băm mật mã học (ví dụ SHA-256), \emph{seed} là giá trị ngẫu nhiên bí mật, \emph{nonce} là một số dùng một lần, và $\|$ ký hiệu phép nối chuỗi. Cơ chế này đảm bảo nhà cái không thể thay đổi kết quả \emph{sau khi} người chơi đã đặt cược.
+
+\begin{giaithich}
+Quy trình hoạt động gồm hai bước: (1) \textbf{Cam kết} - trước khi người chơi đặt cược, nhà cái công bố công khai giá trị băm $H(\text{seed} \| \text{nonce})$ (nhưng \emph{không} công bố seed thật), giống như "niêm phong" một lời hứa mà ai cũng thấy được nhưng chưa ai đọc được nội dung; (2) \textbf{Tiết lộ} - sau khi người chơi đã đặt cược và kết quả được xác định, nhà cái công bố seed thật, và bất kỳ ai cũng có thể tự tính lại $H(\text{seed} \| \text{nonce})$ để kiểm chứng nó khớp với giá trị đã cam kết trước đó. Vì hàm băm mật mã học có tính chất "không thể đảo ngược" và "nhạy cảm với từng bit đầu vào" (chỉ cần đổi $1$ ký tự trong seed, giá trị băm thay đổi hoàn toàn), nhà cái không thể "gian lận hồi tố" bằng cách chọn seed khác sau khi đã biết cược của người chơi.
+\end{giaithich}
+
+% ============================================================
+\section{TÂM LÝ HỌC HÀNH VI \& ĐẠO ĐỨC}
+
+\subsection{Ngụy biện con bạc và Ảo tưởng kiểm soát}
+
+\textbf{Gambler's Fallacy (Ngụy biện con bạc):} Tin rằng sau nhiều lần ra Tài liên tiếp, xác suất ra Xỉu ở ván tiếp theo sẽ tăng lên để "bù lại". Thực tế, các ván là độc lập với nhau: $P(\text{Xỉu}) = 107/216$ luôn không đổi bất kể lịch sử các ván trước đó ra sao - xúc xắc không có "trí nhớ".
+
+\textbf{Illusion of Control (Ảo tưởng kiểm soát):} Tin rằng các yếu tố thuộc về kỹ năng cá nhân (cách lắc xúc xắc, cách chọn số, "cảm giác may mắn" hôm nay) có thể ảnh hưởng đến kết quả của một quá trình hoàn toàn ngẫu nhiên và độc lập.
+
+\begin{giaithich}
+Hai ngụy biện này rất phổ biến vì bộ não con người tiến hóa để tìm kiếm \emph{quy luật} và \emph{nguyên nhân} trong mọi hiện tượng - một kỹ năng sinh tồn hữu ích trong tự nhiên (ví dụ nhận ra dấu hiệu báo trước nguy hiểm), nhưng lại phản tác dụng khi áp dụng vào các quá trình toán học thuần túy ngẫu nhiên và độc lập. Về mặt toán học, nếu các biến ngẫu nhiên $X_1, X_2, \dots$ độc lập, thì theo định nghĩa, $P(X_{n+1} = k \mid X_1, \dots, X_n) = P(X_{n+1}=k)$ -- thông tin về quá khứ hoàn toàn không thay đổi xác suất tương lai, dù trực giác con người thường "cảm thấy" ngược lại.
+\end{giaithich}
+
+\subsection{Lý thuyết Triển vọng (Prospect Theory)}
+
+Kahneman \& Tversky (giải Nobel Kinh tế 2002 cho Kahneman) chỉ ra rằng con người ra quyết định dưới rủi ro không hoàn toàn tuân theo lý thuyết kỳ vọng cổ điển, mà có hai thiên lệch tâm lý quan trọng:
+\begin{itemize}
+    \item \textbf{Sợ mất mát hơn thích được} (Loss Aversion, hệ số $\approx 2.25$): cảm giác đau khổ khi mất $100$ đơn vị tiền mạnh gấp khoảng $2.25$ lần cảm giác vui sướng khi được $100$ đơn vị tiền tương đương.
+    \item \textbf{Đánh giá xác suất nhỏ quá cao} (Overweighting small probabilities): con người có xu hướng phóng đại tầm quan trọng của các sự kiện có xác suất rất thấp -- đây là lý do tâm lý chính khiến xổ số hấp dẫn dù House Edge cực cao, vì người chơi cảm nhận xác suất trúng jackpot lớn hơn nhiều so với con số thực tế $1/8{,}145{,}060$.
+\end{itemize}
+
+Hàm giá trị (value function) trong Lý thuyết Triển vọng:
+\[
+v(x) = \begin{cases}
+x^\alpha & x \ge 0, \\
+-\lambda (-x)^\beta & x < 0,
+\end{cases}
+\]
+với $\alpha \approx \beta \approx 0.88$ (độ cong giảm dần khi số tiền lớn -- lợi ích biên giảm dần) và $\lambda \approx 2.25$ (hệ số sợ mất mát).
+
+\begin{giaithich}
+Khác với lý thuyết kinh tế cổ điển giả định con người luôn tối đa hóa \emph{kỳ vọng lợi ích} một cách hoàn toàn lý trí, Lý thuyết Triển vọng mô tả cách con người \emph{thực sự} cảm nhận được/mất -- và hai đường cong này (được/mất) không đối xứng: đường cong phía "mất" ($x<0$) dốc hơn nhiều so với phía "được" ($x \ge 0$) do hệ số $\lambda \approx 2.25$, giải thích tại sao con người thường chấp nhận rủi ro lớn để \emph{tránh} một khoản lỗ chắc chắn nhỏ hơn, nhưng lại né tránh rủi ro khi có cơ hội chốt lời chắc chắn - một hành vi bất đối xứng mà lý thuyết kỳ vọng cổ điển không giải thích được.
+\end{giaithich}
+
+\subsection{Toán học của sự nghiện cờ bạc}
+
+Dopamine (chất dẫn truyền thần kinh liên quan đến cảm giác thưởng và động lực) tăng vọt không chỉ khi thắng, mà đặc biệt mạnh khi có gần trúng (near-miss) - một kết quả \emph{gần} với chiến thắng nhưng thực chất vẫn là thua. Ví dụ điển hình: máy slot được thiết kế có chủ đích để tăng tần suất hiển thị hai biểu tượng trùng khớp và một biểu tượng lệch ngay sát cạnh (ví dụ hai quả anh đào và một quả chuối ở vị trí liền kề), dù về mặt xác suất kết quả này hoàn toàn tương đương với một lần thua bình thường (không có biểu tượng nào trùng) -- nhưng não bộ phản ứng với near-miss gần giống như một chiến thắng thực sự, kích thích người chơi tiếp tục chơi.
+
+\begin{ungdung}
+Hiểu biết về hiệu ứng near-miss đã dẫn đến các quy định pháp lý ở một số quốc gia yêu cầu nhà sản xuất máy đánh bạc phải công khai tỉ lệ near-miss được thiết kế có chủ đích, nhằm bảo vệ người chơi khỏi bị thao túng tâm lý mà không hề hay biết. Đây là giao điểm giữa toán học xác suất, khoa học thần kinh, và chính sách bảo vệ người tiêu dùng.
+\end{ungdung}
+
+\subsection{Đạo đức và Pháp luật}
+
+Chính phủ nhiều nước cấm hoặc hạn chế nghiêm ngặt quảng cáo cờ bạc, đặt ra giới hạn độ tuổi tham gia (thường từ $18$ hoặc $21$ tuổi trở lên), và yêu cầu in cảnh báo về nguy cơ nghiện trên vé số cùng các sản phẩm cờ bạc khác -- tương tự cảnh báo sức khỏe trên bao bì thuốc lá. Tuy nhiên, xổ số do nhà nước vận hành vẫn tồn tại và được khuyến khích ở nhiều quốc gia (bao gồm Việt Nam) vì đây là nguồn thu quan trọng cho ngân sách, thường được phân bổ cho giáo dục, y tế và các công trình phúc lợi công cộng -- tạo ra một nghịch lý đạo đức thú vị: nhà nước vừa cảnh báo tác hại của cờ bạc, vừa là bên tổ chức hình thức cờ bạc có House Edge cao nhất trong tất cả các loại hình hợp pháp.
+
+\begin{giaithich}
+Nghịch lý trên phản ánh một vấn đề kinh tế học hành vi sâu xa hơn: xổ số nhà nước thường được xem là một dạng thuế tự nguyện hoặc thuế đánh vào hy vọng -- vì người mua vé số tự nguyện trả tiền (khác với thuế bắt buộc), nhưng khoản tiền đó lại phân bổ không đồng đều theo thu nhập: nhiều nghiên cứu kinh tế học chỉ ra rằng người có thu nhập thấp thường chi tỉ lệ thu nhập cho xổ số cao hơn người có thu nhập cao, khiến xổ số về bản chất mang tính thoái thu (regressive) tương tự thuế tiêu dùng đánh đồng đều lên mọi mức thu nhập.
+\end{giaithich}
+
+\newpage
+\section*{KẾT LUẬN}
+\addcontentsline{toc}{section}{KẾT LUẬN}
+
+\paragraph{Kết luận ngắn gọn được rút ra} Qua phân tích xuyên suốt từ xổ số, board game, bài Poker/Blackjack, đến ứng dụng tài chính và AI, ta thấy:
+\begin{itemize}
+    \item Mọi trò chơi cờ bạc thương mại đều được thiết kế có chủ đích với $\mathbb{E}[X] < 0$ cho người chơi -- đây không phải ngẫu nhiên mà là kết quả tính toán kỹ lưỡng của nhà tổ chức.
+    \item House Edge là hệ quả tất yếu của thiết kế toán học (tỉ lệ trả thưởng luôn thấp hơn nghịch đảo xác suất thắng thực tế), không phải là gian lận hay bất hợp pháp -- nó được công khai (dù không phải lúc nào cũng dễ hiểu với người chơi phổ thông).
+    \item Luật số lớn đảm bảo về mặt toán học rằng nhà cái sẽ thắng trong dài hạn, bất kể biến động ngắn hạn ra sao -- đây là nguyên lý nền tảng khiến mô hình kinh doanh casino/xổ số bền vững theo thời gian.
+    \item Các công cụ tổ hợp -- xác suất (chỉnh hợp, tổ hợp, chuỗi Markov, mô phỏng Monte Carlo, kiểm định thống kê) không chỉ giải thích cờ bạc mà còn là nền tảng chung cho tài chính định lượng, bảo hiểm, và trí tuệ nhân tạo hiện đại.
+\end{itemize}
+
+\paragraph{Giá trị thực tiễn.} Hiểu biết vững chắc về xác suất và tổ hợp giúp:
+\begin{itemize}
+    \item Ra quyết định tài chính đúng đắn hơn -- phân biệt rõ giữa đầu tư có kỳ vọng dương dài hạn (dù có rủi ro) và cờ bạc thuần túy có kỳ vọng âm được thiết kế sẵn.
+    \item Nhận diện các bẫy tâm lý (Gambler's Fallacy, Illusion of Control, Near-miss effect) để tránh rơi vào vòng xoáy nghiện cờ bạc, đồng thời có cái nhìn phản biện hơn với các quảng cáo cờ bạc/xổ số.
+    \item Ứng dụng trực tiếp trong bảo hiểm (định phí bảo hiểm hợp lý), định giá tài sản tài chính (quyền chọn, chứng khoán phái sinh), quản lý rủi ro danh mục đầu tư, và phát triển các hệ thống AI chơi game/ra quyết định dưới bất định.
+\end{itemize}
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{giao_trinh} Sách giáo trình Xác suất Thống kê -- các trường đại học.
+\bibitem{markov} Các nghiên cứu chuyên sâu về lý thuyết chuỗi Markov ứng dụng.
+\bibitem{packel} E. Packel, \emph{The Mathematics of Games and Gambling}, MAA, 2006.
+\bibitem{kahneman} D. Kahneman, \emph{Thinking, Fast and Slow}, Farrar, Straus and Giroux, 2011.
+\bibitem{sutton} R. Sutton \& A. Barto, \emph{Reinforcement Learning: An Introduction}, MIT Press, 2018.
+\end{thebibliography}
+
+\end{document}
